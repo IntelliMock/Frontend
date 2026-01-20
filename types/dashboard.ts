@@ -19,6 +19,7 @@ export interface InterviewSession {
     topic: string;
     score: number;
     status: 'Completed' | 'In Progress' | 'Abandoned';
+    feedback?: string;
 }
 
 export interface ActivityDay {

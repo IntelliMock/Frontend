@@ -19,12 +19,12 @@ export function QuickActions({ hasActiveSession }: QuickActionsProps) {
             action: () => console.log('Start interview'),
         },
         {
-            title: 'Resume Last Interview',
-            description: 'Continue where you left off',
+            title: 'Reattempt Last Interview',
+            description: 'Try again to improve your score',
             icon: RotateCcw,
             isPrimary: false,
             disabled: !hasActiveSession,
-            action: () => console.log('Resume interview'),
+            action: () => console.log('Reattempt interview'),
         },
         {
             title: 'Practice Weak Topics',

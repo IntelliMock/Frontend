@@ -35,11 +35,11 @@ export default async function DashboardPage() {
                         {/* Quick Action Cards */}
                         <QuickActions hasActiveSession={dashboardData.hasActiveSession} />
 
-                        {/* Interview History & Consistency Heatmap (2-column grid) */}
-                        <div className="grid gap-8 lg:grid-cols-2">
-                            <InterviewHistory sessions={dashboardData.history} />
-                            <ConsistencyHeatmap activity={dashboardData.activity} />
-                        </div>
+                        {/* Interview History - Full Width */}
+                        <InterviewHistory sessions={dashboardData.history} />
+
+                        {/* Consistency Heatmap - Below Interview History */}
+                        <ConsistencyHeatmap activity={dashboardData.activity} />
 
                         {/* AI Insights & Weak Areas */}
                         <AIInsights insights={dashboardData.aiInsights} />

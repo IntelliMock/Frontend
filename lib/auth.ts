@@ -16,6 +16,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async signIn({ user, account, profile }) {
             try {
+                console.log('=== OAuth Sign-In Attempt ===');
+                console.log('Provider:', account?.provider);
+                console.log('User Email:', user.email);
+                console.log('Backend URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
+
                 // Send OAuth profile to NestJS backend
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/oauth`, {
                     method: 'POST',
@@ -29,20 +34,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     }),
                 });
 
+                console.log('Backend response status:', response.status);
+
                 if (!response.ok) {
-                    console.error('Backend OAuth error:', await response.text());
+                    const errorText = await response.text();
+                    console.error('Backend OAuth error:', errorText);
+                    console.error('Response status:', response.status);
                     return false;
                 }
 
                 const data = await response.json();
+                console.log('Backend response data:', data);
 
                 // Store backend token in user object (will be added to JWT)
                 (user as any).backendToken = data.token;
                 (user as any).role = data.user.role;
 
+                console.log('=== OAuth Sign-In Success ===');
                 return true;
             } catch (error) {
-                console.error('OAuth sign-in error:', error);
+                console.error('=== OAuth Sign-In Error ===');
+                console.error('Error details:', error);
+                console.error('Error message:', error instanceof Error ? error.message : 'Unknown error');
                 return false;
             }
         },

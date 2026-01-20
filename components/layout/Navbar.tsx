@@ -33,7 +33,7 @@ export function Navbar() {
     ]
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header suppressHydrationWarning className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
@@ -64,7 +64,7 @@ export function Navbar() {
 
                     {/* Mobile Menu */}
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                        <SheetTrigger asChild className="md:hidden">
+                        <SheetTrigger asChild className="md:hidden" suppressHydrationWarning>
                             <Button variant="ghost" size="icon">
                                 <Menu className="h-5 w-5" />
                                 <span className="sr-only">Toggle menu</span>
